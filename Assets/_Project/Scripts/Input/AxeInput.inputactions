@@ -1,0 +1,34 @@
+{
+    "name": "AxeInput",
+    "maps": [
+        {
+            "name": "Axe",
+            "id": "7f8ee266-27d3-467d-ad39-1a0e4dc3cc7b",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "2cc12db2-339a-4372-a9ca-4ca52744d978",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3eaf16e4-6d16-4165-96f0-c2dee9af4c6f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1,0 +1,26 @@
+using UnityEngine;
+
+namespace ChopChop
+{
+    public abstract class AView : MonoBehaviour, IView
+    {
+        private Transform _transform;
+
+        public Transform Transform => _transform;
+
+        private void Start()
+        {
+            _transform = gameObject.GetComponent<Transform>();
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            _transform.position = position;
+        }
+
+        public void SetRotation(Vector3 rotation)
+        {
+            _transform.rotation = Quaternion.Euler(rotation);
+        }
+    }
+}
