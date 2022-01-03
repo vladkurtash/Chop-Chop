@@ -7,6 +7,6 @@ namespace ChopChop
     {
         public float playerInputCoolDown;
         public int defaultFrameRate = 60;
-        public Vector3 cutOffPartImpulseForce = new Vector3(3.0f, 0.0f, 0.0f);
+        public Vector3 cutOffPartDefaultImpulseForce = new Vector3(3.0f, 0.0f, 0.0f);
     }
 }

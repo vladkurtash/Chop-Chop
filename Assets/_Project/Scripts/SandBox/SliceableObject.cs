@@ -7,20 +7,11 @@ namespace ChopChop
     // todo Make base class for inheritance 
     public class SliceableObject : MonoBehaviour, ISliceable
     {
-        [SerializeField] private AddForceSide addForceSide;
+        [SerializeField] private DynamicPart dynamicPart = DynamicPart.Right;
 
-        protected enum AddForceSide
+        protected enum DynamicPart
         {
-            None,
             Both,
-            Left,
-            Right
-        }
-
-        private enum CutOffSide
-        {
-            None,
-            Left,
             Right
         }
 
@@ -52,13 +43,39 @@ namespace ChopChop
         protected virtual void SetupLeftPart(SlicedHull slicedHull, Material crossSectionMaterial)
         {
             GameObject part = slicedHull.CreateLowerHull(this.gameObject, crossSectionMaterial);
-            part.AddComponent<CutOffPart>();
+
+            if (LeftPartDynamic())
+            {
+                CutOffPartDynamic cutOffPartDynamic = part.AddComponent<CutOffPartDynamic>();
+                AddForceToPart(cutOffPartDynamic, -Config.Instance.cutOffPartDefaultImpulseForce);
+                return;
+            }
+            
+            part.AddComponent<CutOffPartStatic>();
         }
 
         protected virtual void SetupRightPart(SlicedHull slicedHull, Material crossSectionMaterial)
         {
             GameObject part = slicedHull.CreateUpperHull(this.gameObject, crossSectionMaterial);
-            part.AddComponent<CutOffPart>();
+
+            if (DynamicPartRight())
+            {
+                CutOffPartDynamic cutOffPartDynamic = part.AddComponent<CutOffPartDynamic>();
+                AddForceToPart(cutOffPartDynamic, Config.Instance.cutOffPartDefaultImpulseForce);
+                return;
+            }
+            
+            part.AddComponent<CutOffPartStatic>();
+        }
+
+        private bool LeftPartDynamic()
+        {
+            return dynamicPart == DynamicPart.Both;
+        }
+
+        private bool DynamicPartRight()
+        {
+            return dynamicPart == DynamicPart.Both || dynamicPart == DynamicPart.Right;
         }
 
         protected virtual void AddForceToPart(CutOffPartDynamic cutOffPart, Vector3 force)
