@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace ChopChop
 {
-    // todo Make base class for inheritance 
     public class SliceableObject : MonoBehaviour, ISliceable
     {
         [SerializeField] private DynamicPart dynamicPart = DynamicPart.Right;
@@ -50,7 +49,7 @@ namespace ChopChop
                 AddForceToPart(cutOffPartDynamic, -Config.Instance.cutOffPartDefaultImpulseForce);
                 return;
             }
-            
+
             part.AddComponent<CutOffPartStatic>();
         }
 
@@ -64,7 +63,7 @@ namespace ChopChop
                 AddForceToPart(cutOffPartDynamic, Config.Instance.cutOffPartDefaultImpulseForce);
                 return;
             }
-            
+
             part.AddComponent<CutOffPartStatic>();
         }
 
@@ -85,7 +84,16 @@ namespace ChopChop
 
         protected virtual void OnDisable()
         {
+            SpawnSliceEffect();
             Destroy();
+        }
+
+        private GameObject SpawnSliceEffect()
+        {
+            if (!this.gameObject.scene.isLoaded)
+                return null;
+
+            return Instantiate(SliceEffect.Instance.effect, transform.position, Quaternion.identity);
         }
 
         private void Destroy()
