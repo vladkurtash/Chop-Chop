@@ -196,7 +196,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a9f038c3ceec5843816d2bb73719130, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -501,6 +501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 484670843001781786}
   - component: {fileID: 3331557352517308624}
+  - component: {fileID: 8032657177638225491}
   m_Layer: 0
   m_Name: Axe_classic
   m_TagString: Untagged
@@ -538,6 +539,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bladeView: {fileID: 0}
   _backView: {fileID: 0}
+--- !u!65 &8032657177638225491
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7753767278889278828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.019553227, y: 0.49353522, z: 0.25511461}
+  m_Center: {x: -0.00035847723, y: 0.034036785, z: -0.014583141}
 --- !u!1 &7781496465740934887
 GameObject:
   m_ObjectHideFlags: 0

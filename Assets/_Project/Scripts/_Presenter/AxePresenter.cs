@@ -10,6 +10,8 @@ namespace ChopChop
         private IAxeMoveSystem _moveSystem;
         private IAxeRotateSystem _rotateSystem;
 
+        public event Action Disabling;
+
         public AxePresenter(IAxeModel model, IAxeView view, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem)
         {
             _model = model;
@@ -35,17 +37,14 @@ namespace ChopChop
 
             switch (layer)
             {
-                //case (int)Element.Death: /* GameOver */ break;
-                    
-                case (int)Element.Static: Stuck(); break;
-                    
+                case (int)Element.Death: Death(); break;
+                case (int)Element.Static: StopMovementSystems(); break;
                 case (int)Element.Slicable: Slice(otherCollider); break;
-                    
-                // case (int)Element.ScoreMultiplier: /*  CompleteLevel and multiply score */ break;
+                // case (int)Element.ScoreMultiplier: /*  CompleteLevel and multiply score - Disable Presenter*/ break;
             }
         }
 
-        private void Stuck()
+        private void StopMovementSystems()
         {
             _moveSystem.Stop();
             _rotateSystem.Stop();
@@ -63,7 +62,7 @@ namespace ChopChop
 
             switch (layer)
             {
-                //case (int)Element.Death: /* GameOver */ break;
+                case (int)Element.Death: Death(); break;
                 case (int)Element.Static:
                 case (int)Element.Slicable:
                 //case (int)Element.ScoreMultiplier:
@@ -87,15 +86,24 @@ namespace ChopChop
             _view.SetRotation(_model.Rotataion);
         }
 
-        public void OnDeath()
+        public void Death()
         {
-            //add and enable rigidbody on blande and on handle
+            Disable();
+            _view.OnDeath();
+
+            StopMovementSystems();
+        }
+
+        private void Disable()
+        {
+            Disabling.Invoke();
+            _view.BladeView.OnTriggerEnterEvent -= OnBladeTriggerEnterReact;
+            _view.BackView.OnTriggerEnterEvent -= OnBackTriggerEnterReact;
         }
 
         private void Destroy()
         {
-            _view.BladeView.OnTriggerEnterEvent -= OnBladeTriggerEnterReact;
-            _view.BackView.OnTriggerEnterEvent -= OnBackTriggerEnterReact;
+            Disable();
         }
 
         public void Dispose()

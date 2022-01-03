@@ -11,6 +11,7 @@ namespace ChopChop
         private readonly IAxeRotateSystem _rotateSystem = null;
         private readonly Timers _timers = null;
         private bool _coolDown = true;
+        private bool _updating = true;
 
         public AxeInputRouter(IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, Timers timers)
         {
@@ -32,6 +33,7 @@ namespace ChopChop
         {
             _input.Disable();
             _input.Axe.Jump.performed -= OnJump;
+            _updating = false;
         }
 
         private void OnJump(InputAction.CallbackContext context)
@@ -53,6 +55,9 @@ namespace ChopChop
 
         public void UpdateLocal(float deltaTime)
         {
+            if (!_updating)
+                return;
+                
             _rotateSystem.UpdateLocal(deltaTime);
             _moveSystem.UpdateLocal(deltaTime);
         }

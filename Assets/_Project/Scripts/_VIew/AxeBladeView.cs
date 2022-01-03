@@ -9,7 +9,7 @@ namespace ChopChop
 
         private void OnTriggerEnter(Collider otherCollider)
         {
-            OnTriggerEnterEvent.Invoke(otherCollider);
+            OnTriggerEnterEvent?.Invoke(otherCollider);
         }
 
 #if UNITY_EDITOR

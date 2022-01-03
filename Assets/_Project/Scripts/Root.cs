@@ -7,6 +7,7 @@ namespace ChopChop
         [SerializeField] private AxeRootView axeView;
         [SerializeField] private AxeMoveSystemData axeMoveSystemData;
         [SerializeField] private AxeRotateSystemData axeRotateSystemData;
+        private AxePresenter _axePresenter = null;
         private AxeInputRouter _axeInputRouter = null;
         private Timers _timers = null;
 
@@ -32,17 +33,26 @@ namespace ChopChop
             SetupAxePresenter(model, moveSystem, rotateSystem);
             SetupAxeInput(moveSystem, rotateSystem);
 
-            _axeInputRouter.OnEnable();
+            DoOnEnable();
         }
 
-        private void OnEnable()
+        private void DoOnEnable()
         {
-            // _axeInputRouter.OnEnable();
+            _axeInputRouter.OnEnable();
+            _axePresenter.Disabling += OnAxeDestroy;
         }
 
         private void OnDisable()
         {
             _axeInputRouter.OnDisable();
+            _axePresenter.Disabling -= OnAxeDestroy;
+        }
+
+        public void OnAxeDestroy()
+        {
+            _axeInputRouter.OnDisable();
+            //GUI stuff
+            //Camera stuff (lock)
         }
 
         private void SetDefaultFrameRate()
@@ -52,7 +62,7 @@ namespace ChopChop
 
         private void SetupAxePresenter(IAxeModel model, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem)
         {
-            AxePresenter presenter = new AxePresenter(model, axeView, moveSystem, rotateSystem);
+            _axePresenter = new AxePresenter(model, axeView, moveSystem, rotateSystem);
         }
 
         private void SetupAxeInput(IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem)

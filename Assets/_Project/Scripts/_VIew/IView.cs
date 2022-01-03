@@ -14,6 +14,7 @@ namespace ChopChop
     {
         IAxeBladeView BladeView { get; }
         IAxeBackView BackView { get; }
+        void OnDeath();
     }
 
     public interface IAxeBladeView : IView, ITriggerable

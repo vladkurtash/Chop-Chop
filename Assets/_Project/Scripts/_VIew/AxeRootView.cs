@@ -11,6 +11,23 @@ namespace ChopChop
         public IAxeBladeView BladeView => _bladeView;
         public IAxeBackView BackView => _backView;
 
+        public void OnDeath()
+        {
+            AddComponenets();
+        }
+
+        private void AddComponenets()
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+            Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+            AddForce(rigidbody, Config.Instance.axeDeathDefaultImpulseForce);
+        }
+
+        private void AddForce(Rigidbody rigidbody, Vector3 force)
+        {
+            rigidbody.AddForce(force);
+        }
+
         protected override void Setup()
         {
             GameObject rootGameObject = this.gameObject;

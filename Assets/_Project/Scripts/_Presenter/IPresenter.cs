@@ -5,6 +5,7 @@ namespace ChopChop
 {
     public interface IPresenter : IDisposable
     {
+        event Action Disabling;
         void Setup();
     }
 
@@ -14,6 +15,6 @@ namespace ChopChop
         void OnBackTriggerEnterReact(Collider otherCollider);
         void OnMoved();
         void OnRotated();
-        void OnDeath();
+        void Death();
     }
 }
