@@ -15,4 +15,4 @@ MonoBehaviour:
   playerInputCoolDown: 0.25
   defaultFrameRate: 60
   cutOffPartDefaultImpulseForce: {x: 3, y: 0, z: 0}
-  axeDeathDefaultImpulseForce: {x: 15, y: 50, z: -35}
+  axeDeathDefaultImpulseForce: {x: 15, y: 75, z: -50}

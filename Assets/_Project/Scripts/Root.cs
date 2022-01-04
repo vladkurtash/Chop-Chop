@@ -7,6 +7,7 @@ namespace ChopChop
         [SerializeField] private AxeRootView axeView;
         [SerializeField] private AxeMoveSystemData axeMoveSystemData;
         [SerializeField] private AxeRotateSystemData axeRotateSystemData;
+        [SerializeField] private CameraFollow cameraFollow;
         private AxePresenter _axePresenter = null;
         private AxeInputRouter _axeInputRouter = null;
         private Timers _timers = null;
@@ -39,20 +40,20 @@ namespace ChopChop
         private void DoOnEnable()
         {
             _axeInputRouter.OnEnable();
-            _axePresenter.Disabling += OnAxeDestroy;
+            _axePresenter.Disabling += OnAxeDisable;
         }
 
         private void OnDisable()
         {
             _axeInputRouter.OnDisable();
-            _axePresenter.Disabling -= OnAxeDestroy;
+            _axePresenter.Disabling -= OnAxeDisable;
         }
 
-        public void OnAxeDestroy()
+        public void OnAxeDisable()
         {
             _axeInputRouter.OnDisable();
             //GUI stuff
-            //Camera stuff (lock)
+            cameraFollow.Stop();
         }
 
         private void SetDefaultFrameRate()

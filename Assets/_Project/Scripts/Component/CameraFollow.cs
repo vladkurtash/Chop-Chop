@@ -2,22 +2,30 @@
 
 public class CameraFollow : MonoBehaviour
 {
-
-    public Transform target;
-
-    public float smoothSpeed = 0.125f;
-    public Vector3 offset;
+    [SerializeField] public Transform target;
+    [SerializeField] public float smoothSpeed = 0.125f;
+    private Vector3 _offset;
     private Transform _transform;
+    private bool _moving = false;
+
+    public void Stop()
+    {
+        _moving = false;
+    }
 
     private void Awake()
     {
         _transform = GetComponent<Transform>();
-        offset = _transform.position - target.position;
+        _offset = _transform.position - target.position;
+        _moving = true;
     }
 
     private void LateUpdate()
     {
-        Vector3 desiredPosition = target.position + offset;
+        if (!_moving)
+            return;
+
+        Vector3 desiredPosition = target.position + _offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         _transform.position = smoothedPosition;
     }
