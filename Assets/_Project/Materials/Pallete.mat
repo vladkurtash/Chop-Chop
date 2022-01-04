@@ -103,7 +103,7 @@ Material:
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
     - _SColor: {r: 0.076732986, g: 0.26415092, b: 0, a: 1}
-    - _SpecColor: {r: 0.33962262, g: 0.031229666, b: 0, a: 1}
+    - _SpecColor: {r: 0.41509432, g: 0.038169593, b: 0, a: 1}
 --- !u!114 &4038248236644490013
 MonoBehaviour:
   m_ObjectHideFlags: 11

@@ -123,4 +123,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1443b445666303438cf18af03f64f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dynamicPart: 1
+  dynamicPart: 0
