@@ -5,10 +5,9 @@ namespace ChopChop
     public abstract class AView : MonoBehaviour, IView
     {
         private Transform _transform;
-
         public Transform Transform => _transform;
 
-        private void Start()
+        private void OnEnable()
         {
             _transform = gameObject.GetComponent<Transform>();
         }
@@ -22,5 +21,13 @@ namespace ChopChop
         {
             _transform.rotation = Quaternion.Euler(rotation);
         }
+
+        public virtual void Setup() { }
+    }
+
+    public abstract class AAxeView : AView
+    {
+        [SerializeField] private Renderer renderer = null;
+        public Renderer Renderer => renderer;
     }
 }

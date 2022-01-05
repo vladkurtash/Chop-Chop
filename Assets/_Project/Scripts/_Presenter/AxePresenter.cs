@@ -6,24 +6,29 @@ namespace ChopChop
     public class AxePresenter : IAxePresenter
     {
         private IAxeModel _model;
-        private IAxeView _view;
+        private IAxeRootView _view;
         private IAxeMoveSystem _moveSystem;
         private IAxeRotateSystem _rotateSystem;
 
+        private ColorBlinkSystem _colorBlinkSystem;
+
         public event Action Disabling;
 
-        public AxePresenter(IAxeModel model, IAxeView view, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem)
+        public AxePresenter(IAxeModel model, IAxeRootView view, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, ColorBlinkSystem colorBlinkSystem)
         {
             _model = model;
             _view = view;
             _moveSystem = moveSystem;
             _rotateSystem = rotateSystem;
+            _colorBlinkSystem = colorBlinkSystem;
 
             Setup();
         }
 
         public void Setup()
         {
+            _colorBlinkSystem.Setup(_view.BladeView.Renderer, _view.BackView.Renderer);
+
             _view.BladeView.OnTriggerEnterEvent += OnBladeTriggerEnterReact;
             _view.BackView.OnTriggerEnterEvent += OnBackTriggerEnterReact;
 
@@ -40,7 +45,7 @@ namespace ChopChop
                 case (int)Element.Death: Death(); break;
                 case (int)Element.Static: StopMovementSystems(); break;
                 case (int)Element.Slicable: Slice(otherCollider); break;
-                // case (int)Element.ScoreMultiplier: /*  CompleteLevel and multiply score - Disable Presenter*/ break;
+                    // case (int)Element.ScoreMultiplier: /*  CompleteLevel and multiply score - Disable Presenter*/ break;
             }
         }
 
@@ -65,7 +70,7 @@ namespace ChopChop
                 case (int)Element.Death: Death(); break;
                 case (int)Element.Static:
                 case (int)Element.Slicable:
-                //case (int)Element.ScoreMultiplier:
+                    //case (int)Element.ScoreMultiplier:
                     SpringBack(); break;
             }
         }
@@ -74,6 +79,8 @@ namespace ChopChop
         {
             _moveSystem.SpringBack();
             _rotateSystem.SpringBack();
+
+            _colorBlinkSystem.Blink();
         }
 
         public void OnMoved()

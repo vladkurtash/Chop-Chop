@@ -90,6 +90,7 @@ namespace ChopChop
 
         private GameObject SpawnSliceEffect()
         {
+            //This returned false both when quitting the app/editor and when unloading the scene
             if (!this.gameObject.scene.isLoaded)
                 return null;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ChopChop
 {
-    public class AxeBladeView : AView, IAxeBladeView
+    public class AxeBladeView : AAxeView, IAxeBladeView
     {
         public event Action<Collider> OnTriggerEnterEvent;
 

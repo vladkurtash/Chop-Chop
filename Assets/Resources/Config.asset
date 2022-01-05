@@ -16,3 +16,8 @@ MonoBehaviour:
   defaultFrameRate: 60
   cutOffPartDefaultImpulseForce: {x: 3, y: 0, z: 0}
   axeDeathDefaultImpulseForce: {x: 15, y: 75, z: -50}
+  colorEnd:
+    serializedVersion: 2
+    rgba: 4294967295
+  blinkingRate: 0.25
+  blinkCount: 1

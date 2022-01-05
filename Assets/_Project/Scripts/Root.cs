@@ -12,6 +12,8 @@ namespace ChopChop
         private AxeInputRouter _axeInputRouter = null;
         private Timers _timers = null;
 
+        private Updater _updater = null;
+
         private void Start()
         {
             Setup();
@@ -19,6 +21,8 @@ namespace ChopChop
 
         private void Setup()
         {
+            _updater = new Updater();
+
             CrossSectionMaterialProvider.Setup();
 
             SetDefaultFrameRate();
@@ -52,7 +56,7 @@ namespace ChopChop
         public void OnAxeDisable()
         {
             _axeInputRouter.OnDisable();
-            //GUI stuff
+            //todo GUI stuff - GameOver Menu
             cameraFollow.Stop();
         }
 
@@ -63,7 +67,9 @@ namespace ChopChop
 
         private void SetupAxePresenter(IAxeModel model, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem)
         {
-            _axePresenter = new AxePresenter(model, axeView, moveSystem, rotateSystem);
+            ColorBlinkSystem colorBlinkSystem = new ColorBlinkSystem();
+            _updater.AddUpdatable(colorBlinkSystem);
+            _axePresenter = new AxePresenter(model, axeView, moveSystem, rotateSystem, colorBlinkSystem);
         }
 
         private void SetupAxeInput(IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem)
@@ -75,6 +81,7 @@ namespace ChopChop
         {
             _axeInputRouter.UpdateLocal(Time.deltaTime);
             _timers.UpdateLocal(Time.deltaTime);
+            _updater.UpdateLocal(Time.deltaTime);
         }
     }
 }

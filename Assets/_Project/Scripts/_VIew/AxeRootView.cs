@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ChopChop
 {
     [SelectionBase]
-    public class AxeRootView : ARootView, IAxeView
+    public class AxeRootView : ARootView, IAxeRootView
     {
         [SerializeField] private AxeBladeView _bladeView;
         [SerializeField] private AxeBackView _backView;
@@ -14,13 +14,14 @@ namespace ChopChop
         public void OnDeath()
         {
             AddComponenets();
+            Rigidbody rigidbody = this.gameObject.GetComponent<Rigidbody>();
+            AddForce(rigidbody, Config.Instance.axeDeathDefaultImpulseForce);
         }
 
         private void AddComponenets()
         {
             gameObject.GetComponent<BoxCollider>().enabled = true;
             Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
-            AddForce(rigidbody, Config.Instance.axeDeathDefaultImpulseForce);
         }
 
         private void AddForce(Rigidbody rigidbody, Vector3 force)

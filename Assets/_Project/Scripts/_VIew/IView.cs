@@ -10,17 +10,22 @@ namespace ChopChop
         void SetRotation(Vector3 rotation);
     }
 
-    public interface IAxeView : IView
+    public interface IAxeView : IView, ITriggerable
+    {
+        Renderer Renderer { get; }
+    }
+
+    public interface IAxeRootView : IView
     {
         IAxeBladeView BladeView { get; }
         IAxeBackView BackView { get; }
         void OnDeath();
     }
 
-    public interface IAxeBladeView : IView, ITriggerable
+    public interface IAxeBladeView : IAxeView
     { }
 
-    public interface IAxeBackView : IView, ITriggerable
+    public interface IAxeBackView : IAxeView
     { }
 
     public interface ITriggerable

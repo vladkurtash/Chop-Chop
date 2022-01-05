@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 280905668111806290}
   - component: {fileID: 7984172767175392999}
   m_Layer: 0
-  m_Name: Handle
+  m_Name: HandleMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48807457ae8c69643b55d84e214c4dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderer: {fileID: 3324396088075375299}
 --- !u!1 &6095848691642737538
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ GameObject:
   - component: {fileID: 2501497097348243599}
   - component: {fileID: 3324396088075375299}
   m_Layer: 0
-  m_Name: Blade
+  m_Name: BladeMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +197,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: ff42fb4f02a2bb34a90a6a43e3a6cc31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -611,3 +612,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3388bb51f8c73b4b81f821e6eaeede1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderer: {fileID: 7984172767175392999}
