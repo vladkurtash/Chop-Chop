@@ -9,16 +9,18 @@ namespace ChopChop
         private readonly AxeInput _input = null;
         private readonly IAxeMoveSystem _moveSystem = null;
         private readonly IAxeRotateSystem _rotateSystem = null;
+        private readonly IAxeSoundSystem _soundSystem = null;
         private readonly Timers _timers = null;
         private bool _coolDown = true;
         private bool _disabled = true;
 
-        public AxeInputRouter(IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, Timers timers)
+        public AxeInputRouter(IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, Timers timers, IAxeSoundSystem soundSystem)
         {
             _input = new AxeInput();
             _moveSystem = moveSystem;
             _rotateSystem = rotateSystem;
             _timers = timers;
+            _soundSystem = soundSystem;
 
             _coolDown = false;
         }
@@ -43,6 +45,7 @@ namespace ChopChop
 
             _moveSystem.Jump();
             _rotateSystem.Jump();
+            _soundSystem.PlayFlipSound();
 
             StartCoolDown();
         }

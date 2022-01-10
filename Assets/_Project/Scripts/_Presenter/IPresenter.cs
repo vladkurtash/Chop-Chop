@@ -11,6 +11,7 @@ namespace ChopChop
 
     public interface IAxePresenter : IPresenter
     { 
+        event Action Hit;
         void OnBladeTriggerEnterReact(Collider otherCollider);
         void OnBackTriggerEnterReact(Collider otherCollider);
         void OnMoved();

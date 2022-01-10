@@ -11,6 +11,7 @@ namespace ChopChop
         private AxePresenter _axePresenter = null;
         private AxeInputRouter _axeInputRouter = null;
         private Timers _timers = null;
+        private HitSeries _hitSeries = null;
 
         private Updater _updater = null;
 
@@ -35,8 +36,14 @@ namespace ChopChop
             AxeMoveSystemRouter moveSystem = new AxeMoveSystemRouter(model, axeMoveSystemData);
             AxeRotateSystemRouter rotateSystem = new AxeRotateSystemRouter(model, axeRotateSystemData);
 
-            SetupAxePresenter(model, moveSystem, rotateSystem);
-            SetupAxeInput(moveSystem, rotateSystem);
+            _hitSeries = new HitSeries(AudioConfig.Instance.maxHitSeries, _timers);
+            AudioHitSeries audioHitSeries = new AudioHitSeries(AudioConfig.Instance.defaultHitSoundPitch, AudioConfig.Instance.maxHitSoundPitch, _hitSeries);
+            AudioPlayer.Instance.Setup(audioHitSeries);
+
+            AxeSoundSystem axeSoundSystem = new AxeSoundSystem(AxeSounds.Instance.flip, model);
+
+            SetupAxePresenter(model, moveSystem, rotateSystem, axeSoundSystem);
+            SetupAxeInput(moveSystem, rotateSystem, axeSoundSystem);
 
             DoOnEnable();
         }
@@ -45,12 +52,14 @@ namespace ChopChop
         {
             _axeInputRouter.OnEnable();
             _axePresenter.Disabling += OnAxeDisable;
+            _axePresenter.Hit += OnObjectHit;
         }
 
         private void OnDisable()
         {
             _axeInputRouter.OnDisable();
             _axePresenter.Disabling -= OnAxeDisable;
+            _axePresenter.Hit -= OnObjectHit;
         }
 
         public void OnAxeDisable()
@@ -65,16 +74,21 @@ namespace ChopChop
             Application.targetFrameRate = Config.Instance.defaultFrameRate;
         }
 
-        private void SetupAxePresenter(IAxeModel model, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem)
+        private void SetupAxePresenter(IAxeModel model, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, AxeSoundSystem soundSystem)
         {
-            ColorBlinkSystem colorBlinkSystem = new ColorBlinkSystem();
+            ColorBlinkSystem colorBlinkSystem = new ColorBlinkSystem(AxeBlinkingConfig.Instance.targetColor, AxeBlinkingConfig.Instance.blinkingRate, AxeBlinkingConfig.Instance.blinkCount);
             _updater.AddUpdatable(colorBlinkSystem);
-            _axePresenter = new AxePresenter(model, axeView, moveSystem, rotateSystem, colorBlinkSystem);
+            _axePresenter = new AxePresenter(model, axeView, moveSystem, rotateSystem, colorBlinkSystem, soundSystem);
         }
 
-        private void SetupAxeInput(IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem)
+        private void OnObjectHit()
         {
-            _axeInputRouter = new AxeInputRouter(moveSystem, rotateSystem, _timers);
+            _hitSeries.IncreaseBy1();
+        }
+
+        private void SetupAxeInput(IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, IAxeSoundSystem soundSystem)
+        {
+            _axeInputRouter = new AxeInputRouter(moveSystem, rotateSystem, _timers, soundSystem);
         }
 
         private void Update()

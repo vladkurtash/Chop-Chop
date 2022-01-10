@@ -27,12 +27,12 @@ namespace ChopChop
     public interface IRotate
     {
         Vector3 Rotataion { get; }
+        event Action Rotated;
+
         void SetRotation(Vector3 rotation);
         void SetRotation(float x);
         void AddRotation(float x);
         void AddRotation(Vector3 rotation);
         // float RotationSpeed { get; }
-
-        event Action Rotated;
     }
 }

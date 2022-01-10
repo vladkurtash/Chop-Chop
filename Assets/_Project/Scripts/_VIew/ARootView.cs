@@ -6,7 +6,5 @@ namespace ChopChop
         {
             Setup();
         }
-
-        protected abstract void Setup();
     }
 }

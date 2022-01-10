@@ -11,7 +11,7 @@ namespace ChopChop
         public IAxeBladeView BladeView => _bladeView;
         public IAxeBackView BackView => _backView;
 
-        public void OnDeath()
+        public void OnDisable()
         {
             AddComponenets();
             Rigidbody rigidbody = this.gameObject.GetComponent<Rigidbody>();
@@ -29,7 +29,7 @@ namespace ChopChop
             rigidbody.AddForce(force);
         }
 
-        protected override void Setup()
+        public override void Setup()
         {
             GameObject rootGameObject = this.gameObject;
             _bladeView = rootGameObject.GetComponentInChildren<AxeBladeView>();

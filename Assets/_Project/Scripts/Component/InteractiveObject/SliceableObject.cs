@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChopChop
 {
-    public class SliceableObject : MonoBehaviour, ISliceable
+    public class SliceableObject : InteractiveObject, ISliceable
     {
         [SerializeField] private DynamicPart dynamicPart = DynamicPart.Right;
 
@@ -17,6 +17,7 @@ namespace ChopChop
         public virtual void Slice(Vector3 position, Vector3 direction)
         {
             DoSlice(position, direction);
+            MakeSound();
             this.gameObject.SetActive(false);
         }
 

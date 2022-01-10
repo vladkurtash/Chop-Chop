@@ -21,3 +21,7 @@ MonoBehaviour:
     rgba: 4294967295
   blinkingRate: 0.25
   blinkCount: 1
+  defaultHitSoundPitch: 1.5
+  maxHitSoundPitch: 10
+  maxHitSeries: 15
+  hitSeriesDuration: 0.25

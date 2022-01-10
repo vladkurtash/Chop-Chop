@@ -14,7 +14,7 @@ namespace ChopChop
             {
                 if (_instance == null)
                 {
-                    T[] assets = Resources.LoadAll<T>("");
+                    T[] assets = Resources.LoadAll<T>("Config");
                     if (assets == null || assets.Length < 1)
                     {
                         Debug.LogError($"{typeof(T)}: assets Length is less than one.");

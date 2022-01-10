@@ -27,7 +27,7 @@ namespace ChopChop
 
     public abstract class AAxeView : AView
     {
-        [SerializeField] private Renderer renderer = null;
+        [SerializeField] new private Renderer renderer = null;
         public Renderer Renderer => renderer;
     }
 }

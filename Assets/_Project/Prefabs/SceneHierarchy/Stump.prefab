@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 194327270802484176}
   - component: {fileID: 2189283146139458642}
   - component: {fileID: 2189283146139458641}
+  - component: {fileID: 905433044359559736}
   m_Layer: 8
   m_Name: Stump
   m_TagString: Untagged
@@ -110,3 +111,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.39526632, y: 0.47255802, z: 0.40146598}
   m_Center: {x: -0.0013174564, y: 0.23631245, z: -0.0054611266}
+--- !u!114 &905433044359559736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6397961802520262558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 561a17b16e3eebc4eb30e177d57f7f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 57dd1b3fca80a9648b8f9b95eff060fd, type: 3}

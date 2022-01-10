@@ -3,29 +3,38 @@ using System.Collections;
 
 namespace ChopChop
 {
-    public class ColorBlinkSystem : IUpdatable
+    public class ColorBlinkSystem : IColorBlinkSystem
     {
         private bool _blinking = false;
-        MaterialPropertyBlock _materialPropertyBlock = null;
+        private MaterialPropertyBlock _materialPropertyBlock = null;
 
         private Renderer[] _renderers = null;
         private int _blinkCount = 1;
         private float _rate = 0.3f;
         private Color32 _colorStart = new Color32(0, 0, 0, 255);
         private Color32 _colorEnd = new Color32(0, 0, 0, 255);
-        float _totalDeltaTime = 0.0f;
+        private float _totalDeltaTime = 0.0f;
+
+        public ColorBlinkSystem(Color32 endColor, float rate, int blinkCount)
+        {
+            _colorEnd = endColor;
+            _rate = rate;
+            _blinkCount = blinkCount;
+            _materialPropertyBlock = new MaterialPropertyBlock();
+        }
 
         public void Setup(params Renderer[] renderers)
         {
             _renderers = renderers;
-            _materialPropertyBlock = new MaterialPropertyBlock();
-            _colorEnd = Config.Instance.colorEnd;
-            _rate = Config.Instance.blinkingRate;
-            _blinkCount = Config.Instance.blinkCount;
-
+            if (_renderers.Length < 1)
+            {
+                Debug.LogError($"{typeof(ColorBlinkSystem)}: renderers Length is less than one.");
+                return;
+            }
+            
             EnableMaterialsEmission();
         }
-        
+
         /// <summary>
         /// Need to be enabled to display color changes 
         /// </summary>
@@ -82,5 +91,11 @@ namespace ChopChop
                 _renderers[i].SetPropertyBlock(_materialPropertyBlock);
             }
         }
+    }
+
+    public interface IColorBlinkSystem : IUpdatable
+    {
+        void Setup(params Renderer[] renderers);
+        void Blink();
     }
 }

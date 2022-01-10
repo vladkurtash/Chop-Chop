@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c53da344f71b5e94b9c7bac575c50d39, type: 3}
+  m_Name: AxeSounds
+  m_EditorClassIdentifier: 
+  bladeHit: {fileID: 8300000, guid: d31b7a1b96641574aa79a2ccb8a72f76, type: 3}
+  flip:
+  - {fileID: 8300000, guid: 37f7c9ae5683c644b8ac0c1b1371b4a4, type: 3}
+  - {fileID: 8300000, guid: c833e31a3ed936d49b3493cc28cda998, type: 3}
+  - {fileID: 8300000, guid: 16627de982b9c0d4d8be52d94a08481c, type: 3}
+  backHit: {fileID: 8300000, guid: d31b7a1b96641574aa79a2ccb8a72f76, type: 3}

@@ -19,7 +19,7 @@ namespace ChopChop
     {
         IAxeBladeView BladeView { get; }
         IAxeBackView BackView { get; }
-        void OnDeath();
+        void OnDisable();
     }
 
     public interface IAxeBladeView : IAxeView

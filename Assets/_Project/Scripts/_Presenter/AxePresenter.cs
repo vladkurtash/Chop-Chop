@@ -9,18 +9,20 @@ namespace ChopChop
         private IAxeRootView _view;
         private IAxeMoveSystem _moveSystem;
         private IAxeRotateSystem _rotateSystem;
-
-        private ColorBlinkSystem _colorBlinkSystem;
+        private IColorBlinkSystem _colorBlinkSystem;
+        private IAxeSoundSystem _soundSystem;
 
         public event Action Disabling;
+        public event Action Hit;
 
-        public AxePresenter(IAxeModel model, IAxeRootView view, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, ColorBlinkSystem colorBlinkSystem)
+        public AxePresenter(IAxeModel model, IAxeRootView view, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, IColorBlinkSystem colorBlinkSystem, IAxeSoundSystem soundSystem)
         {
             _model = model;
             _view = view;
             _moveSystem = moveSystem;
             _rotateSystem = rotateSystem;
             _colorBlinkSystem = colorBlinkSystem;
+            _soundSystem = soundSystem;
 
             Setup();
         }
@@ -42,9 +44,14 @@ namespace ChopChop
 
             switch (layer)
             {
-                case (int)Element.Death: Death(); break;
-                case (int)Element.Static: StopMovementSystems(); break;
-                case (int)Element.Slicable: Slice(otherCollider); break;
+                case (int)Element.Death: 
+                    Death(); break;
+                case (int)Element.Static: 
+                    StopMovementSystems(); 
+                    HitObject(otherCollider);
+                    break;
+                case (int)Element.Slicable: 
+                    Slice(otherCollider); break;
                     // case (int)Element.ScoreMultiplier: /*  CompleteLevel and multiply score - Disable Presenter*/ break;
             }
         }
@@ -59,6 +66,13 @@ namespace ChopChop
         {
             ISliceable slicable = otherCollider.GetComponent<ISliceable>();
             slicable?.Slice(_view.BladeView.Transform.position, _view.BladeView.Transform.up);
+            Hit?.Invoke();
+        }
+
+        private void HitObject(Collider otherCollider)
+        {
+            otherCollider.GetComponent<IHittable>()?.Hit();
+            Hit?.Invoke();
         }
 
         public void OnBackTriggerEnterReact(Collider otherCollider)
@@ -67,7 +81,8 @@ namespace ChopChop
 
             switch (layer)
             {
-                case (int)Element.Death: Death(); break;
+                case (int)Element.Death: 
+                    Death(); break;
                 case (int)Element.Static:
                 case (int)Element.Slicable:
                     //case (int)Element.ScoreMultiplier:
@@ -81,6 +96,13 @@ namespace ChopChop
             _rotateSystem.SpringBack();
 
             _colorBlinkSystem.Blink();
+
+            PlaySound(AxeSounds.Instance.backHit);
+        }
+
+        private void PlaySound(AudioClip audioClip)
+        {
+            AudioSource.PlayClipAtPoint(audioClip, _view.Transform.position);
         }
 
         public void OnMoved()
@@ -96,7 +118,7 @@ namespace ChopChop
         public void Death()
         {
             Disable();
-            _view.OnDeath();
+            _view.OnDisable();
 
             StopMovementSystems();
         }
