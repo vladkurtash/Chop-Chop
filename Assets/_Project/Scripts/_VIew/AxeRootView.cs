@@ -11,7 +11,7 @@ namespace ChopChop
         public IAxeBladeView BladeView => _bladeView;
         public IAxeBackView BackView => _backView;
 
-        public void OnDisable()
+        public void Disable()
         {
             AddComponenets();
             Rigidbody rigidbody = this.gameObject.GetComponent<Rigidbody>();

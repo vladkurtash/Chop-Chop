@@ -1,8 +1,20 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ChopChop
 {
-    public class InteractiveObject : MonoBehaviour, ISoundable
+    [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
+    public class InteractiveObject : MonoBehaviour
+    {
+        [SerializeField] public UnityEvent Response;
+
+        public void Raise()
+        {
+            Response?.Invoke();
+        }
+    }
+
+    public class SoundableObject : InteractiveObject, ISoundable
     {
         [SerializeField] private AudioClip clip;
 

@@ -40,7 +40,7 @@ namespace ChopChop
             AudioHitSeries audioHitSeries = new AudioHitSeries(AudioConfig.Instance.defaultHitSoundPitch, AudioConfig.Instance.maxHitSoundPitch, _hitSeries);
             AudioPlayer.Instance.Setup(audioHitSeries);
 
-            AxeSoundSystem axeSoundSystem = new AxeSoundSystem(AxeSounds.Instance.flip, model);
+            AxeSoundSystem axeSoundSystem = new AxeSoundSystem(AxeSounds.Instance.flip, AxeSounds.Instance.backHit, model);
 
             SetupAxePresenter(model, moveSystem, rotateSystem, axeSoundSystem);
             SetupAxeInput(moveSystem, rotateSystem, axeSoundSystem);

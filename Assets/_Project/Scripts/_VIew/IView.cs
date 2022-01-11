@@ -19,10 +19,10 @@ namespace ChopChop
     {
         IAxeBladeView BladeView { get; }
         IAxeBackView BackView { get; }
-        void OnDisable();
+        void Disable();
     }
 
-    public interface IAxeBladeView : IAxeView
+    public interface IAxeBladeView : IAxeView, IRaycastable
     { }
 
     public interface IAxeBackView : IAxeView
@@ -36,5 +36,10 @@ namespace ChopChop
     public interface ICollisionable
     {
         event Action<Collision> OnCollisionEnterEvent;
+    }
+
+    public interface IRaycastable
+    {
+        event Action<RaycastHit> OnRaycastHitEvent;
     }
 }

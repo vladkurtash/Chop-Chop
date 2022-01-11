@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChopChop
 {
-    public class SliceableObject : InteractiveObject, ISliceable
+    public class SliceableObject : SoundableObject, ISliceable
     {
         [SerializeField] private DynamicPart dynamicPart = DynamicPart.Right;
 
@@ -58,7 +58,7 @@ namespace ChopChop
         {
             GameObject part = slicedHull.CreateUpperHull(this.gameObject, crossSectionMaterial);
 
-            if (DynamicPartRight())
+            if (RightPartDynamic())
             {
                 CutOffPartDynamic cutOffPartDynamic = part.AddComponent<CutOffPartDynamic>();
                 AddForceToPart(cutOffPartDynamic, Config.Instance.cutOffPartDefaultImpulseForce);
@@ -73,7 +73,7 @@ namespace ChopChop
             return dynamicPart == DynamicPart.Both;
         }
 
-        private bool DynamicPartRight()
+        private bool RightPartDynamic()
         {
             return dynamicPart == DynamicPart.Both || dynamicPart == DynamicPart.Right;
         }

@@ -1797,6 +1797,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561a17b16e3eebc4eb30e177d57f7f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
   clip: {fileID: 8300000, guid: d31b7a1b96641574aa79a2ccb8a72f76, type: 3}
 --- !u!1 &1092950301342764291
 GameObject:
@@ -2304,6 +2307,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561a17b16e3eebc4eb30e177d57f7f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
   clip: {fileID: 8300000, guid: d31b7a1b96641574aa79a2ccb8a72f76, type: 3}
 --- !u!1 &1314636901826643644
 GameObject:
@@ -2753,6 +2759,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561a17b16e3eebc4eb30e177d57f7f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
   clip: {fileID: 8300000, guid: d31b7a1b96641574aa79a2ccb8a72f76, type: 3}
 --- !u!1 &1379640293191033861
 GameObject:
@@ -4326,6 +4335,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561a17b16e3eebc4eb30e177d57f7f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
   clip: {fileID: 8300000, guid: d31b7a1b96641574aa79a2ccb8a72f76, type: 3}
 --- !u!1 &5594422022881027348
 GameObject:
@@ -5718,6 +5730,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561a17b16e3eebc4eb30e177d57f7f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
   clip: {fileID: 8300000, guid: d31b7a1b96641574aa79a2ccb8a72f76, type: 3}
 --- !u!1 &9156027110187809949
 GameObject:

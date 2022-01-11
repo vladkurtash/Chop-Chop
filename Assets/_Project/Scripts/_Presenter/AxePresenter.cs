@@ -30,8 +30,13 @@ namespace ChopChop
         public void Setup()
         {
             _colorBlinkSystem.Setup(_view.BladeView.Renderer, _view.BackView.Renderer);
+            RegisterEvents();
+        }
 
+        private void RegisterEvents()
+        {
             _view.BladeView.OnTriggerEnterEvent += OnBladeTriggerEnterReact;
+            _view.BladeView.OnRaycastHitEvent += OnBladeRaycastHitReact;
             _view.BackView.OnTriggerEnterEvent += OnBackTriggerEnterReact;
 
             _model.Moved += OnMoved;
@@ -44,15 +49,36 @@ namespace ChopChop
 
             switch (layer)
             {
-                case (int)Element.Death: 
-                    Death(); break;
-                case (int)Element.Static: 
-                    StopMovementSystems(); 
+                case (int)Element.Death:
+                    Death();
+                    break;
+                case (int)Element.Static:
+                    StopMovementSystems();
                     HitObject(otherCollider);
                     break;
-                case (int)Element.Slicable: 
-                    Slice(otherCollider); break;
-                    // case (int)Element.ScoreMultiplier: /*  CompleteLevel and multiply score - Disable Presenter*/ break;
+                case (int)Element.Slicable:
+                    Slice(otherCollider);
+                    break;
+                case (int)Element.ScoreMultiplier:
+                    OnBladeHitScoreMultiplier(otherCollider);
+                    break;
+            }
+        }
+
+        private void OnBladeHitScoreMultiplier(Collider otherCollider)
+        {
+            HitObject(otherCollider);
+            Disable();
+        }
+
+        public void OnBladeRaycastHitReact(RaycastHit raycastHit)
+        {
+            int layer = raycastHit.collider.gameObject.layer;
+            if (layer == (int)Element.ScoreMultiplier)
+            {
+                HitObject(raycastHit.collider);
+                Disable();
+                return;
             }
         }
 
@@ -81,7 +107,7 @@ namespace ChopChop
 
             switch (layer)
             {
-                case (int)Element.Death: 
+                case (int)Element.Death:
                     Death(); break;
                 case (int)Element.Static:
                 case (int)Element.Slicable:
@@ -97,12 +123,7 @@ namespace ChopChop
 
             _colorBlinkSystem.Blink();
 
-            PlaySound(AxeSounds.Instance.backHit);
-        }
-
-        private void PlaySound(AudioClip audioClip)
-        {
-            AudioSource.PlayClipAtPoint(audioClip, _view.Transform.position);
+            _soundSystem.PlayBackHitSound();
         }
 
         public void OnMoved()
@@ -118,7 +139,7 @@ namespace ChopChop
         public void Death()
         {
             Disable();
-            _view.OnDisable();
+            _view.Disable();
 
             StopMovementSystems();
         }
@@ -126,8 +147,17 @@ namespace ChopChop
         private void Disable()
         {
             Disabling.Invoke();
+            UnRegisterEvents();
+            StopMovementSystems();
+        }
+
+        private void UnRegisterEvents()
+        {
             _view.BladeView.OnTriggerEnterEvent -= OnBladeTriggerEnterReact;
+            _view.BladeView.OnRaycastHitEvent -= OnBladeRaycastHitReact;
             _view.BackView.OnTriggerEnterEvent -= OnBackTriggerEnterReact;
+            _model.Moved -= OnMoved;
+            _model.Rotated -= OnRotated;
         }
 
         private void Destroy()
