@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5420582955562310813}
   - component: {fileID: 5420582955562310786}
   - component: {fileID: 5420582955562310787}
+  - component: {fileID: 786836139613165960}
   m_Layer: 11
   m_Name: ScoreMultiplier
   m_TagString: Untagged
@@ -121,6 +122,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 786836139613165960}
+        m_MethodName: CompleteLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   clip: {fileID: 8300000, guid: d31b7a1b96641574aa79a2ccb8a72f76, type: 3}
 --- !u!54 &5420582955562310785
 Rigidbody:
@@ -160,7 +172,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5420582955562310811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e62de0ca419099d46b45adedc6933b0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 371fa74eeb9bb844796ca732e2a62ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   color32:
@@ -177,9 +189,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5420582955562310811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2224977f3d63884ab352c828cb00296, type: 3}
+  m_Script: {fileID: 11500000, guid: b16dd3d71fa15424895bfe588bb99ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: {x: 0.1, y: 0.05, z: 0}
+  scale: {x: 0.05, y: 0.05, z: 0}
   rate: 0.25
   scaleCount: 3
+--- !u!114 &786836139613165960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5420582955562310811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e273413eb037c6a46a3bd0c23611d994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -13,6 +13,7 @@ namespace ChopChop
         private IAxeSoundSystem _soundSystem;
 
         public event Action Disabling;
+        public event Action Destroying;
         public event Action Hit;
 
         public AxePresenter(IAxeModel model, IAxeRootView view, IAxeMoveSystem moveSystem, IAxeRotateSystem rotateSystem, IColorBlinkSystem colorBlinkSystem, IAxeSoundSystem soundSystem)
@@ -138,6 +139,7 @@ namespace ChopChop
 
         public void Death()
         {
+            Destroying?.Invoke();
             Disable();
             _view.Disable();
 

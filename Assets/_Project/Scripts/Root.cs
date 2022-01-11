@@ -1,4 +1,8 @@
 using UnityEngine;
+using ChopChop.GUI;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.OnScreen;
+using UnityEngine.EventSystems;
 
 namespace ChopChop
 {
@@ -8,6 +12,14 @@ namespace ChopChop
         [SerializeField] private AxeMoveSystemData axeMoveSystemData;
         [SerializeField] private AxeRotateSystemData axeRotateSystemData;
         [SerializeField] private CameraFollow cameraFollow;
+
+        [SerializeField] private MainMenuWindowPresenter mainMenuWindow;
+        [SerializeField] private InGameWindowPresenter inGameWindow;
+        [SerializeField] private GameCompleteWindowPresenter gameCompleteWindow;
+        [SerializeField] private GameOverWindowPresenter gameOverWindow;
+
+        [SerializeField] private OnScreenButton axeJumpArea;
+        
         private AxePresenter _axePresenter = null;
         private AxeInputRouter _axeInputRouter = null;
         private Timers _timers = null;
@@ -18,6 +30,12 @@ namespace ChopChop
         private void Start()
         {
             Setup();
+            mainMenuWindow.Show(OnStartClick);
+        }
+
+        private void OnStartClick()
+        {
+            inGameWindow.Show(LoadNextLevel);
         }
 
         private void Setup()
@@ -52,6 +70,7 @@ namespace ChopChop
         {
             _axeInputRouter.OnEnable();
             _axePresenter.Disabling += OnAxeDisable;
+            _axePresenter.Destroying += OnAxeDestroying;
             _axePresenter.Hit += OnObjectHit;
         }
 
@@ -59,14 +78,31 @@ namespace ChopChop
         {
             _axeInputRouter.OnDisable();
             _axePresenter.Disabling -= OnAxeDisable;
+            _axePresenter.Destroying -= OnAxeDestroying;
             _axePresenter.Hit -= OnObjectHit;
         }
 
         public void OnAxeDisable()
         {
             _axeInputRouter.OnDisable();
-            //todo GUI stuff - GameOver Menu
             cameraFollow.Stop();
+        }
+
+        public void OnAxeDestroying()
+        {
+            gameOverWindow.Show(LoadNextLevel);
+            _axeInputRouter.OnDisable();
+            cameraFollow.Stop();
+        }
+
+        public void OnLevelComplete()
+        {
+            gameCompleteWindow.Show(LoadNextLevel);
+        }
+
+        private void LoadNextLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void SetDefaultFrameRate()

@@ -6,6 +6,7 @@ namespace ChopChop
     public interface IPresenter : IDisposable
     {
         event Action Disabling;
+        event Action Destroying;
         void Setup();
     }
 
