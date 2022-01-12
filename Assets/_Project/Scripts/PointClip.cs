@@ -5,19 +5,29 @@ namespace ChopChop
     //TODO: Create ObjectPooler instead of Instantiation
     public class PointClip : MonoBehaviour
     {
-        public static void Create(AudioClip clip, Vector3 position, float pitch, float volume = 1.0f)
+        public static PointClip Create(AudioClip clip, Vector3 position, float pitch, float volume = 1.0f)
         {
-            GameObject pointObject = Instantiate(new GameObject(), position, Quaternion.identity);
-            SetupObject(clip, pointObject, pitch, volume);
+            GameObject pointObject = new GameObject();
+            PointClip pointClip = pointObject.AddComponent<PointClip>();
 
-            Destroy(pointObject, clip.length / pitch);
+            pointClip._pitch = 1;
+            pointClip._clip = clip;
+            pointClip._volume = volume;
+
+            return pointClip;
         }
 
-        private static void SetupObject(AudioClip clip, GameObject obj, float pitch, float volume = 1.0f)
+        private float _pitch = 0.0f;
+        private AudioClip _clip = null;
+        private float _volume = 1.0f;
+        
+        private void Start()
         {
-            AudioSource audioSource = obj.AddComponent<AudioSource>();
-            audioSource.pitch = pitch;
-            audioSource.PlayOneShot(clip, volume);
+            AudioSource audioSource = this.gameObject.AddComponent<AudioSource>();
+            audioSource.pitch = _pitch;
+            audioSource.PlayOneShot(_clip, _volume);
+
+            Destroy(this.gameObject, _clip.length / _pitch);
         }
     }
 }

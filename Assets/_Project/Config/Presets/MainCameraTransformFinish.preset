@@ -6,7 +6,7 @@ Preset:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MainCameraTransform
+  m_Name: MainCameraTransformFinish
   m_TargetType:
     m_NativeTypeID: 4
     m_ManagedTypePPtr: {fileID: 0}
@@ -14,31 +14,31 @@ Preset:
   m_Properties:
   - target: {fileID: 0}
     propertyPath: m_LocalRotation.x
-    value: 0.026072476
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LocalRotation.y
-    value: -0.089211464
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LocalRotation.z
-    value: 0.002336082
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LocalRotation.w
-    value: 0.99566865
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_LocalPosition.x
-    value: 1.16
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_LocalPosition.y
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_LocalPosition.x
+    value: 18.47
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_LocalPosition.y
+    value: 3.84
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_LocalPosition.z
-    value: -8.92
+    value: 18.07
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LocalScale.x
@@ -54,15 +54,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_RootOrder
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LocalEulerAnglesHint.x
-    value: 3
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LocalEulerAnglesHint.y
-    value: -10.24
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LocalEulerAnglesHint.z
