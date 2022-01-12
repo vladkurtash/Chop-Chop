@@ -33,6 +33,8 @@ public class CameraPresenter : MonoBehaviour
         _transform = GetComponent<Transform>();
         _currentRotation = _transform.rotation.eulerAngles;
         _state = State.Follow;
+
+        Debug.Log(_transform.position - target.position);
     }
 
     private void LateUpdate()
