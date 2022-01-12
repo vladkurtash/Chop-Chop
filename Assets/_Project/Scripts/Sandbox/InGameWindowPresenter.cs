@@ -8,8 +8,6 @@ namespace ChopChop.GUI
     {
         [SerializeField] private Button restartButton;
 
-        public event Action onRestartClick;
-
         public void Show(Action onRestartClick)
         {
             restartButton.onClick.RemoveAllListeners();

@@ -5,6 +5,12 @@ namespace ChopChop
 {
     public class ColorBlinkSystem : IColorBlinkSystem
     {
+        public enum Type
+        {
+            Infinity,
+            LoopCount
+        }
+
         private bool _blinking = false;
         private MaterialPropertyBlock _materialPropertyBlock = null;
 
@@ -14,13 +20,24 @@ namespace ChopChop
         private Color32 _colorStart = new Color32(0, 0, 0, 255);
         private Color32 _colorEnd = new Color32(0, 0, 0, 255);
         private float _totalDeltaTime = 0.0f;
+        private Type _type = Type.Infinity;
 
         public ColorBlinkSystem(Color32 endColor, float rate, int blinkCount)
         {
             _colorEnd = endColor;
             _rate = rate;
-            _blinkCount = blinkCount;
+            _blinkCount = blinkCount * 2;
             _materialPropertyBlock = new MaterialPropertyBlock();
+            _type = Type.LoopCount;
+        }
+
+        public ColorBlinkSystem(Color32 endColor, float rate)
+        {
+            _colorEnd = endColor;
+            _rate = rate;
+            _materialPropertyBlock = new MaterialPropertyBlock();
+            _type = Type.Infinity;
+            _blinkCount = int.MaxValue;
         }
 
         public void Setup(params Renderer[] renderers)
@@ -65,7 +82,7 @@ namespace ChopChop
         {
             _totalDeltaTime += deltaTime / _rate;
             //Need to multiply by 2 because one blink is two cycles from 0 to 1 (from 0 to 1 & from 1 to 2)
-            _totalDeltaTime = Mathf.Clamp(_totalDeltaTime, 0.0f, _blinkCount * 2);
+            _totalDeltaTime = Mathf.Clamp(_totalDeltaTime, 0.0f, _blinkCount);
 
             SmoothTransition(_colorStart, _colorEnd, _totalDeltaTime);
         }
@@ -73,7 +90,7 @@ namespace ChopChop
         private void SetSystemState()
         {
             //Need to multiply by 2 because one blink is two cycles from 0 to 1 (from 0 to 1 & from 1 to 2)
-            if ((_totalDeltaTime) > _blinkCount * 2)
+            if ((_totalDeltaTime) > _blinkCount)
             {
                 _blinking = false;
                 return;

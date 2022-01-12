@@ -85,19 +85,19 @@ namespace ChopChop
         public void OnAxeDisable()
         {
             _axeInputRouter.OnDisable();
-            cameraFollow.Stop();
         }
 
         public void OnAxeDestroying()
         {
             gameOverWindow.Show(LoadNextLevel);
             _axeInputRouter.OnDisable();
-            cameraFollow.Stop();
+            cameraFollow.SetState(CameraFollow.State.None);
         }
 
         public void OnLevelComplete()
         {
             gameCompleteWindow.Show(LoadNextLevel);
+            cameraFollow.SetState(CameraFollow.State.Align);
         }
 
         private void LoadNextLevel()

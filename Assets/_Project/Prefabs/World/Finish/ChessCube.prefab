@@ -385,6 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e273413eb037c6a46a3bd0c23611d994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  confetti: {fileID: 4528955953535179747, guid: f9f62a8091d28fb4c9526de29952822f,
+    type: 3}
+  confettiSpawnOffset: {x: 0, y: -0.1, z: 0}
 --- !u!1 &563183652090371466
 GameObject:
   m_ObjectHideFlags: 0

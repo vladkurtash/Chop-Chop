@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 2294861433469865730}
   - component: {fileID: 8004609634576388906}
   - component: {fileID: 3637246405303328263}
+  - component: {fileID: 4996080877942916447}
   m_Layer: 0
   m_Name: BladeColider
   m_TagString: Untagged
@@ -124,8 +125,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.14010239, y: 0.03473836, z: 0.35141596}
-  m_Center: {x: 0.04309845, y: 0.03335678, z: 0.13341661}
+  m_Size: {x: 0.017267227, y: 0.03473836, z: 0.21589994}
+  m_Center: {x: 0.13684082, y: 0.03335678, z: 0.20614752}
 --- !u!114 &3637246405303328263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +140,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 3324396088075375299}
+--- !u!65 &4996080877942916447
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4738074039201293206}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1670227, y: 1, z: 0.15588458}
+  m_Center: {x: 0.050816536, y: 0, z: 0.031624805}
 --- !u!1 &6095848691642737538
 GameObject:
   m_ObjectHideFlags: 0
