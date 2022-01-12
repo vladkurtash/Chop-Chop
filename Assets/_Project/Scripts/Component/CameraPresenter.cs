@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraPresenter : MonoBehaviour
 {
     public enum State
     {
@@ -12,12 +12,13 @@ public class CameraFollow : MonoBehaviour
     private State _state = State.None;
 
     [SerializeField] public Transform target;
-    [SerializeField] public float smoothSpeed = 0.125f;
-    private Vector3 _offset = Vector3.zero;
+    [SerializeField] public float followMovementSpeed;
+    [SerializeField] private Vector3 _offset;
     private Transform _transform = null;
 
-    [SerializeField] private Vector3 _alignmentOffset = Vector3.zero;
-    [SerializeField] private Vector3 _alignmentRotation = Vector3.zero;
+    [SerializeField] public float alignmentMovementSpeed;
+    [SerializeField] private Vector3 alignmentOffset;
+    [SerializeField] private Vector3 alignmentRotation;
     [SerializeField] private float _rotationSpeed;
     private Vector3 _currentRotation;
     private Quaternion _nextRotation;
@@ -30,9 +31,6 @@ public class CameraFollow : MonoBehaviour
     private void Awake()
     {
         _transform = GetComponent<Transform>();
-        _offset = _transform.position - target.position;
-        _alignmentOffset += _offset;
-
         _currentRotation = _transform.rotation.eulerAngles;
         _state = State.Follow;
     }
@@ -50,13 +48,13 @@ public class CameraFollow : MonoBehaviour
 
     private void Follow()
     {
-        SetCameraTransform(_offset, Quaternion.Euler(_currentRotation));
+        SetCameraTransform(_offset, Quaternion.Euler(_currentRotation), followMovementSpeed);
     }
 
-    private void SetCameraTransform(Vector3 positionOffset, Quaternion rotation)
+    private void SetCameraTransform(Vector3 positionOffset, Quaternion rotation, float movementSpeed)
     {
         Vector3 desiredPosition = target.position + positionOffset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, movementSpeed * Time.deltaTime);
 
         _nextRotation = Quaternion.Lerp(_transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
         _transform.SetPositionAndRotation(smoothedPosition, _nextRotation);
@@ -64,6 +62,6 @@ public class CameraFollow : MonoBehaviour
 
     private void Align()
     {
-        SetCameraTransform(_alignmentOffset, Quaternion.Euler(_alignmentRotation));
+        SetCameraTransform(alignmentOffset, Quaternion.Euler(alignmentRotation), alignmentMovementSpeed);
     }
 }

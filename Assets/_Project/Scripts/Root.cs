@@ -11,7 +11,7 @@ namespace ChopChop
         [SerializeField] private AxeRootView axeView;
         [SerializeField] private AxeMoveSystemData axeMoveSystemData;
         [SerializeField] private AxeRotateSystemData axeRotateSystemData;
-        [SerializeField] private CameraFollow cameraFollow;
+        [SerializeField] private CameraPresenter cameraFollow;
 
         [SerializeField] private MainMenuWindowPresenter mainMenuWindow;
         [SerializeField] private InGameWindowPresenter inGameWindow;
@@ -91,13 +91,13 @@ namespace ChopChop
         {
             gameOverWindow.Show(LoadNextLevel);
             _axeInputRouter.OnDisable();
-            cameraFollow.SetState(CameraFollow.State.None);
+            cameraFollow.SetState(CameraPresenter.State.None);
         }
 
         public void OnLevelComplete()
         {
             gameCompleteWindow.Show(LoadNextLevel);
-            cameraFollow.SetState(CameraFollow.State.Align);
+            cameraFollow.SetState(CameraPresenter.State.Align);
         }
 
         private void LoadNextLevel()
