@@ -9,14 +9,25 @@ namespace ChopChop
         public event Action<RaycastHit> OnRaycastHitEvent;
 
         [SerializeField] private float rayLength;
+        private bool _wasFirstCollision = false;
 
         private void OnTriggerEnter(Collider otherCollider)
         {
-            OnTriggerEnterEvent?.Invoke(otherCollider);
+            if (_wasFirstCollision)
+            {
+                OnTriggerEnterEvent?.Invoke(otherCollider);
+                return;
+            }
+
+            _wasFirstCollision = true;
         }
 
         private void FixedUpdate()
         {
+            //Since the function "OnTriggerEnter" occurs after "FixedUpdate" function, the flag "_wasFirstCollision" is updated in it 
+            if (!_wasFirstCollision)
+                return;
+
             if (Physics.Raycast(transform.position, -transform.right, out RaycastHit hit, rayLength))
             {
 #if UNITY_EDITOR
