@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ChopChop
+namespace ChopChop.Component
 {
     public class ColorBlinker : MonoBehaviour
     {

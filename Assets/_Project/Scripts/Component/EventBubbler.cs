@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
  
-namespace ChopChop
+namespace ChopChop.Component
 {
     public sealed class EventBubbler : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
     {

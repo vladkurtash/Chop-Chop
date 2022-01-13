@@ -4,7 +4,7 @@ namespace ChopChop
 {
     public class ObjectDestroyer : MonoBehaviour
     {
-        private float _distanceToDestroy = 5.0f;
+        private float _distanceToDestroy = 7.0f;
         private Transform _cameraTransform = null;
         private Vector3 _vectorToCamera = Vector3.zero;
         private Transform _transform = null;

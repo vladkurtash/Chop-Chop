@@ -8,9 +8,10 @@ namespace ChopChop
         public static PointClip Create(AudioClip clip, Vector3 position, float pitch, float volume = 1.0f)
         {
             GameObject pointObject = new GameObject();
+            pointObject.transform.position = position;
             PointClip pointClip = pointObject.AddComponent<PointClip>();
 
-            pointClip._pitch = 1;
+            pointClip._pitch = pitch;
             pointClip._clip = clip;
             pointClip._volume = volume;
 

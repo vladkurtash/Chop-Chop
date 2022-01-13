@@ -141,4 +141,4 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   clip: {fileID: 8300000, guid: be30c05955e0d594fa87022e649d68db, type: 3}
-  dynamicPart: 1
+  dynamicPart: 0
