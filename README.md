@@ -6,3 +6,5 @@ In this project I implemented MVP pattern.
 This is my training project and I don't have much development experience, so there must be A LOT OF PROBLEMS here.
 
 ![Alt Text](Assets/Demonstration/GifCreative.gif)
+
+[Sound effects obtained from zapsplat.com](https://www.zapsplat.com)
